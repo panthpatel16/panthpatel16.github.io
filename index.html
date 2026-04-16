@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panth Patel — Software Engineer</title>
+<meta name="description" content="Panth Patel — Software Engineer specializing in Java, Spring Boot, distributed systems, and fintech infrastructure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#07090d;--bg2:#0c0f16;--bg3:#11151e;--bg4:#161c27;
+  --gold:#c8a84b;--gold-lt:#e2c46a;--gold-dim:rgba(200,168,75,.12);--gold-bd:rgba(200,168,75,.22);
+  --silver:#a4b3c8;--silver-d:rgba(164,179,200,.55);
+  --txt:#d8e3f0;--txt-d:#6e849e;--txt-f:#2e3d52;
+  --green:#3ddc84;--bd:rgba(255,255,255,.055);--bd2:rgba(255,255,255,.09);
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+
+/* TICKER */
+.ticker{position:fixed;bottom:0;left:0;right:0;z-index:300;height:30px;background:rgba(7,9,13,.97);border-top:1px solid var(--gold-bd);overflow:hidden;display:flex;align-items:center}
+.t-track{display:flex;align-items:center;white-space:nowrap;animation:tick 55s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:8px;padding:0 22px;font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+.tl{color:var(--txt-d)}.tv{color:var(--txt)}.tv.up{color:var(--gold)}.tv.live{color:var(--green)}.tsep{color:var(--txt-f)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .3s,border-color .3s}
+nav.scrolled{background:rgba(7,9,13,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+.nav-i{max-width:1300px;margin:0 auto;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-mono{width:38px;height:38px;border-radius:7px;border:1px solid var(--gold-bd);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;color:var(--gold)}
+.nav-txt{display:flex;flex-direction:column}
+.nav-nm{font-size:13px;font-weight:600;color:var(--txt);line-height:1.2;letter-spacing:.02em}
+.nav-rl{font-size:10px;color:var(--txt-d);font-family:var(--mono);letter-spacing:.08em}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:11px;color:var(--txt-d);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;font-weight:500}
+.nav-links a:hover{color:var(--gold)}
+.nav-av{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--mono);letter-spacing:.1em;color:var(--gold);border:1px solid var(--gold-bd);padding:8px 18px;border-radius:4px;text-decoration:none;background:var(--gold-dim);transition:background .2s;text-transform:uppercase}
+.nav-av:hover{background:rgba(200,168,75,.22)}
+.av-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+
+/* HERO */
+.hero{min-height:100vh;padding:130px 3rem 7rem;position:relative;z-index:1;max-width:1300px;margin:0 auto;display:flex;flex-direction:column;gap:5rem}
+.hero-grid{display:grid;grid-template-columns:1fr 480px;gap:5rem;align-items:center}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;color:var(--txt-d);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:up .7s .1s forwards}
+.ey-ln{display:inline-block;width:38px;height:1px;background:var(--gold)}
+.hero-h{font-family:var(--serif);font-size:clamp(3rem,6vw,5.8rem);font-weight:300;line-height:1.06;margin-bottom:2rem;opacity:0;animation:up .8s .25s forwards}
+.h-thin{color:var(--txt)}.h-gold{font-style:italic;color:var(--gold)}
+.hero-p{font-size:15.5px;color:var(--txt-d);line-height:1.9;max-width:520px;margin-bottom:2.5rem;opacity:0;animation:up .8s .4s forwards}
+.hero-p strong{color:var(--txt);font-weight:600}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:up .8s .55s forwards}
+.btn-g{display:inline-flex;align-items:center;background:var(--gold);color:var(--bg);padding:13px 28px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.06em;text-decoration:none;transition:background .2s,transform .2s;text-transform:uppercase}
+.btn-g:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-o{display:inline-flex;align-items:center;border:1px solid var(--bd2);color:var(--silver);padding:13px 28px;border-radius:4px;font-size:12px;font-weight:500;letter-spacing:.06em;text-decoration:none;transition:border-color .2s,color .2s;text-transform:uppercase}
+.btn-o:hover{border-color:var(--gold-bd);color:var(--gold)}
+
+/* TERMINAL */
+.term{background:var(--bg2);border:1px solid var(--bd2);border-radius:10px;overflow:hidden;opacity:0;animation:up .9s .5s forwards;box-shadow:0 40px 100px rgba(0,0,0,.7)}
+.term-bar{background:var(--bg3);border-bottom:1px solid var(--bd);padding:10px 16px;display:flex;align-items:center;gap:8px}
+.td{width:12px;height:12px;border-radius:50%}.td.r{background:#ff5f57}.td.y{background:#ffbd2e}.td.g{background:#28c840}
+.term-ttl{margin-left:8px;font-family:var(--mono);font-size:11px;color:var(--txt-d)}
+.term-body{padding:1.5rem;font-family:var(--mono);font-size:12.5px;line-height:2.1}
+.tln{display:block}.tpr{color:var(--gold);margin-right:8px}.tcmd{color:var(--txt)}
+.tout{color:var(--silver-d);padding-left:16px}.tout.gd{color:var(--gold)}.tout.gn{color:var(--green)}
+.tblk{height:5px;display:block}
+.tcur{display:inline-block;color:var(--gold);animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:8px;overflow:hidden;opacity:0;animation:up .8s .75s forwards}
+.sc{background:var(--bg2);padding:2rem 1.75rem;transition:background .2s}.sc:hover{background:var(--bg3)}
+.sv{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:6px}
+.sl{font-size:13px;font-weight:600;color:var(--txt);letter-spacing:.02em;margin-bottom:3px}
+.ss{font-size:10px;color:var(--txt-d);font-family:var(--mono)}
+
+/* SHARED */
+.wrap{max-width:1300px;margin:0 auto;padding:0 3rem}
+section{padding:7rem 0;position:relative;z-index:1}
+.sec-ey{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.en{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.1em}
+.el{display:block;width:44px;height:1px;background:var(--gold-bd)}
+.et{font-family:var(--mono);font-size:11px;color:var(--txt-d);letter-spacing:.12em;text-transform:uppercase}
+.sec-h{font-family:var(--serif);font-size:clamp(2rem,4vw,3.6rem);font-weight:300;color:var(--txt);line-height:1.1;margin-bottom:3.5rem}
+.sec-h em{font-style:italic;color:var(--gold)}
+
+/* ABOUT */
+.about-s{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 340px;gap:6rem;align-items:start}
+.about-copy p{font-size:15px;color:var(--txt-d);line-height:1.95;margin-bottom:1.25rem}
+.about-copy p strong{color:var(--txt);font-weight:600}
+.about-copy p em{font-style:italic;color:var(--gold)}
+.certs{display:flex;flex-direction:column;gap:10px;margin-top:2.5rem}
+.cert{display:flex;align-items:center;gap:14px;background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:14px 18px;transition:border-color .2s}
+.cert:hover{border-color:var(--gold-bd)}
+.cert-ic{font-size:18px;color:var(--gold)}
+.cert-nm{font-size:12px;font-weight:600;color:var(--txt)}
+.cert-dt{font-size:10px;color:var(--txt-d);font-family:var(--mono);margin-top:2px}
+.pcard{background:var(--bg3);border:1px solid var(--bd);border-radius:14px;padding:2.5rem 2rem;position:sticky;top:130px}
+.pav{width:78px;height:78px;border-radius:50%;border:2px solid var(--gold-bd);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:28px;color:var(--gold);margin:0 auto 1.25rem}
+.pnm{font-size:19px;font-weight:600;color:var(--txt);text-align:center;font-family:var(--serif)}
+.ptl{font-size:10px;color:var(--txt-d);text-align:center;font-family:var(--mono);letter-spacing:.08em;margin-top:4px}
+.pdiv{height:1px;background:var(--bd);margin:1.5rem 0}
+.pd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pdl{font-size:10px;color:var(--txt-f);font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.pdv{font-size:12px;color:var(--txt);font-weight:500}
+.pst{display:flex;align-items:center;gap:8px;justify-content:center;font-size:11px;color:var(--green);font-family:var(--mono);letter-spacing:.06em;margin-top:.5rem}
+.pst-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+
+/* EXPERTISE */
+.exp-s{background:var(--bg)}
+.sk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.sk-card{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:2rem;transition:border-color .25s,transform .25s}
+.sk-card:hover{border-color:var(--gold-bd);transform:translateY(-4px)}
+.sk-ic{font-size:20px;color:var(--gold);margin-bottom:12px}
+.sk-cat{font-size:12px;font-weight:600;color:var(--txt);letter-spacing:.06em;margin-bottom:1.2rem;text-transform:uppercase}
+.sk-pills{display:flex;flex-wrap:wrap;gap:7px}
+.sp{font-size:11px;font-family:var(--mono);padding:4px 11px;border-radius:3px;border:1px solid var(--bd2);color:var(--txt-d);background:rgba(255,255,255,.02);transition:color .2s,border-color .2s;cursor:default}
+.sp:hover{color:var(--gold);border-color:var(--gold-bd)}
+
+/* EXPERIENCE */
+.work-s{background:var(--bg2)}
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:220px 38px 1fr;gap:0}
+.tll{padding:0 2rem 3.5rem 0;text-align:right}
+.tlco{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:5px}
+.tlpe{font-size:10px;color:var(--gold);font-family:var(--mono);letter-spacing:.06em;margin-bottom:3px}
+.tllo{font-size:10px;color:var(--txt-d);font-family:var(--mono)}
+.tlty{font-size:9px;color:var(--txt-f);font-family:var(--mono);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.tlsp{display:flex;flex-direction:column;align-items:center}
+.tl-node{width:13px;height:13px;border-radius:50%;border:2px solid var(--gold);background:var(--bg2);flex-shrink:0;margin-top:3px;z-index:1}
+.tl-line{flex:1;width:1px;background:var(--bd2);margin:4px 0}
+.tlr{padding:0 0 3.5rem 2rem}
+.tlro{font-size:16px;font-weight:400;color:var(--gold);font-family:var(--serif);font-style:italic;margin-bottom:1rem}
+.tlhl{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tlhl li{font-size:13.5px;color:var(--txt-d);line-height:1.75;padding-left:18px;position:relative}
+.tlhl li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:11px;top:2px}
+
+/* PROJECTS */
+.proj-s{background:var(--bg)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.pcard2{background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:2.25rem;display:flex;flex-direction:column;transition:border-color .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.pcard2::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity .25s}
+.pcard2:hover{border-color:var(--gold-bd);transform:translateY(-5px);box-shadow:0 28px 70px rgba(0,0,0,.6)}
+.pcard2:hover::after{opacity:1}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
+.ptag{font-size:9px;font-family:var(--mono);color:var(--gold);letter-spacing:.14em;border:1px solid var(--gold-bd);padding:4px 10px;border-radius:3px}
+.pmet{text-align:right}
+.pmv{display:block;font-family:var(--serif);font-size:1.8rem;color:var(--gold);line-height:1}
+.pml{display:block;font-size:9px;font-family:var(--mono);color:var(--txt-d);margin-top:2px}
+.ptitle{font-family:var(--serif);font-size:1.6rem;color:var(--txt);margin-bottom:4px;font-weight:400}
+.psub{font-size:10px;font-family:var(--mono);color:var(--txt-d);letter-spacing:.06em;margin-bottom:1.25rem}
+.pdesc{font-size:13.5px;color:var(--txt-d);line-height:1.85;flex:1;margin-bottom:1.5rem}
+.pstack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2rem}
+.pp{font-size:10px;font-family:var(--mono);padding:3px 9px;border-radius:3px;background:rgba(200,168,75,.08);color:var(--gold);border:1px solid var(--gold-bd)}
+.pcta{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:.07em;color:var(--txt-d);text-decoration:none;border-top:1px solid var(--bd);padding-top:1.25rem;text-transform:uppercase;transition:color .2s}
+.pcta:hover{color:var(--gold)}
+.ca{transition:transform .2s}.pcard2:hover .ca{transform:translateX(4px)}
+
+/* CONTACT */
+.contact-s{background:var(--bg2);text-align:center}
+.contact-in{max-width:660px;margin:0 auto}
+.contact-sub{font-size:15px;color:var(--txt-d);line-height:1.9;margin-bottom:3rem}
+.cemail{display:inline-block;font-family:var(--mono);font-size:14px;color:var(--gold);border:1px solid var(--gold-bd);background:var(--gold-dim);padding:16px 36px;border-radius:4px;text-decoration:none;letter-spacing:.04em;transition:background .2s;margin-bottom:2.5rem;word-break:break-all}
+.cemail:hover{background:rgba(200,168,75,.22)}
+.c-links{display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap}
+.cl{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--txt-d);text-decoration:none;border:1px solid var(--bd);border-radius:4px;padding:10px 20px;transition:border-color .2s,color .2s;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+.cl:hover{border-color:var(--gold-bd);color:var(--gold)}
+.cl-ic{font-family:var(--mono);font-size:11px;color:var(--gold)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:2rem 3rem 3.5rem;background:var(--bg);position:relative;z-index:1}
+.ft{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fb{display:flex;align-items:center;gap:12px}
+.fm{font-family:var(--serif);font-size:20px;color:var(--gold)}
+.fn{font-size:13px;font-weight:600;color:var(--txt-d)}
+.fc{font-family:var(--mono);font-size:10px;color:var(--txt-f);letter-spacing:.06em}
+
+/* ANIMATIONS */
+@keyframes up{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-bd)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero-grid{grid-template-columns:1fr}.term{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr}.pcard{position:static}
+  .sk-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.nav-i{padding:1rem 1.5rem}
+  .wrap{padding:0 1.5rem}.hero{padding:120px 1.5rem 5rem}
+  .sk-grid{grid-template-columns:1fr}
+  .tl-item{grid-template-columns:1fr}.tll{text-align:left;padding:0 0 .5rem}
+  .tlsp{display:none}.tlr{padding:0 0 2.5rem}
+  footer{padding:2rem 1.5rem 3.5rem}
+  .ft{flex-direction:column;align-items:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="t-track">
+    <span class="ti"><span class="tl">STACK</span><span class="tv up">JAVA · SPRING BOOT · AWS</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">COMPANY</span><span class="tv">DEUTSCHE BANK</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">TX/DAY</span><span class="tv up">1.5M+</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">LATENCY</span><span class="tv up">↓ 28%</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">CONCURRENCY</span><span class="tv up">↑ 40%</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">UPTIME</span><span class="tv up">92%</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">CLOUD</span><span class="tv">AWS EKS · KUBERNETES · DOCKER</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">DATA</span><span class="tv">POSTGRESQL · KAFKA · REDIS</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">FRONTEND</span><span class="tv">REACT · ANGULAR · TYPESCRIPT</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">STATUS</span><span class="tv live">● OPEN TO HIRE</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">STACK</span><span class="tv up">JAVA · SPRING BOOT · AWS</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">COMPANY</span><span class="tv">DEUTSCHE BANK</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">TX/DAY</span><span class="tv up">1.5M+</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">LATENCY</span><span class="tv up">↓ 28%</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">UPTIME</span><span class="tv up">92%</span></span><span class="tsep"> | </span>
+    <span class="ti"><span class="tl">STATUS</span><span class="tv live">● OPEN TO HIRE</span></span><span class="tsep"> | </span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-i">
+    <div class="nav-brand">
+      <div class="nav-mono">PP</div>
+      <div class="nav-txt">
+        <span class="nav-nm">Panth Patel</span>
+        <span class="nav-rl">Software Engineer</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:panthpatel1697@gmail.com" class="nav-av">
+      <span class="av-dot"></span>Available
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow"><span class="ey-ln"></span>Deutsche Bank · Illinois, USA</div>
+      <h1 class="hero-h">
+        <span class="h-thin">Systems that</span><br>
+        <em class="h-gold">move capital</em><br>
+        <span class="h-thin">at scale.</span>
+      </h1>
+      <p class="hero-p">
+        Software engineer with <strong>3 years</strong> building distributed financial systems.
+        Microservices, event-driven architecture, and cloud-native infrastructure
+        across <strong>Deutsche Bank</strong> and <strong>S&amp;P Global</strong>.
+        M.S. Information Technology — Indiana Wesleyan University, 2025.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-g">View Projects</a>
+        <a href="https://www.linkedin.com/in/panthpatel16" target="_blank" rel="noopener" class="btn-o">LinkedIn ↗</a>
+        <a href="https://github.com/panthpatel16" target="_blank" rel="noopener" class="btn-o">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="td r"></span><span class="td y"></span><span class="td g"></span>
+        <span class="term-ttl">panth@portfolio ~</span>
+      </div>
+      <div class="term-body">
+        <span class="tln"><span class="tpr">$</span><span class="tcmd">whoami</span></span>
+        <span class="tln tout">Panth Patel — Software Engineer</span>
+        <span class="tblk"></span>
+        <span class="tln"><span class="tpr">$</span><span class="tcmd">cat experience.json</span></span>
+        <span class="tln tout gd">{ "company": "Deutsche Bank",</span>
+        <span class="tln tout gd">&nbsp;&nbsp;"transactions_per_day": "1.5M+",</span>
+        <span class="tln tout gd">&nbsp;&nbsp;"latency_reduction": "28%",</span>
+        <span class="tln tout gd">&nbsp;&nbsp;"uptime": "92%" }</span>
+        <span class="tblk"></span>
+        <span class="tln"><span class="tpr">$</span><span class="tcmd">echo $STACK</span></span>
+        <span class="tln tout">Java · Spring Boot · AWS · Kafka · React</span>
+        <span class="tblk"></span>
+        <span class="tln"><span class="tpr">$</span><span class="tcmd">cat status.txt</span></span>
+        <span class="tln tout gn">Open to Full Stack &amp; Backend roles</span>
+        <span class="tblk"></span>
+        <span class="tln"><span class="tpr">$</span><span class="tcur">_</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="sc"><div class="sv">1.5M+</div><div class="sl">Daily Transactions</div><div class="ss">Processed across microservices</div></div>
+    <div class="sc"><div class="sv">28%</div><div class="sl">Latency Reduced</div><div class="ss">Spring WebFlux migration</div></div>
+    <div class="sc"><div class="sv">40%</div><div class="sl">Concurrency Gain</div><div class="ss">Reactive API architecture</div></div>
+    <div class="sc"><div class="sv">92%</div><div class="sl">System Uptime</div><div class="ss">AWS EKS + Kubernetes</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-s">
+  <div class="wrap">
+    <div class="sec-ey reveal"><span class="en">01</span><span class="el"></span><span class="et">About</span></div>
+    <div class="about-grid">
+      <div>
+        <h2 class="sec-h reveal">Engineer who ships,<br><em>not just codes.</em></h2>
+        <div class="about-copy reveal">
+          <p>Three years building systems where correctness and performance are the product. In financial services, the cost of failure is measured in dollars and trust — not just downtime.</p>
+          <p>At <strong>Deutsche Bank</strong>, the microservices I design process over <strong>1.5 million transactions every day</strong>. I've reduced latency 28% migrating to reactive APIs with Spring WebFlux, and maintained 92% uptime across containerized workloads on AWS EKS.</p>
+          <p>At <strong>S&amp;P Global</strong>, I built data pipelines and analytics dashboards that cut manual reporting effort by 42% across 18+ business teams. Strong CS foundation from Gujarat Technological University.</p>
+          <p>Completed my <strong>M.S. in Information Technology</strong> at Indiana Wesleyan University in December 2025 — while working full-time at Deutsche Bank. Based in <em>Illinois, open to roles across the US.</em></p>
+        </div>
+        <div class="certs reveal">
+          <div class="cert"><span class="cert-ic">◈</span><div><div class="cert-nm">AWS Certified</div><div class="cert-dt">Developing Applications in Python on AWS</div></div></div>
+          <div class="cert"><span class="cert-ic">◈</span><div><div class="cert-nm">AWS Certified</div><div class="cert-dt">Technical Support for AWS Workloads</div></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="pcard">
+          <img src="profile.jpg" alt="Panth Patel" class="pav">
+          <div class="pnm">Panth Patel</div>
+          <div class="ptl">Software Engineer</div>
+          <div class="pdiv"></div>
+          <div class="pd"><span class="pdl">Location</span><span class="pdv">Illinois, USA</span></div>
+          <div class="pd"><span class="pdl">Current</span><span class="pdv">Deutsche Bank</span></div>
+          <div class="pd"><span class="pdl">M.S.</span><span class="pdv">Indiana Wesleyan, 2025</span></div>
+          <div class="pd"><span class="pdl">B.E.</span><span class="pdv">Gujarat Tech. Univ.</span></div>
+          <div class="pd"><span class="pdl">Experience</span><span class="pdv">3 Years · Fintech</span></div>
+          <div class="pd"><span class="pdl">Stack</span><span class="pdv">Java · Spring · AWS</span></div>
+          <div class="pdiv"></div>
+          <div class="pst"><span class="pst-dot"></span>Open to opportunities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise" class="exp-s">
+  <div class="wrap">
+    <div class="sec-ey reveal"><span class="en">02</span><span class="el"></span><span class="et">Expertise</span></div>
+    <h2 class="sec-h reveal">What I <em>build with.</em></h2>
+    <div class="sk-grid">
+      <div class="sk-card reveal"><div class="sk-ic">◈</div><div class="sk-cat">Backend Engineering</div><div class="sk-pills"><span class="sp">Java 11</span><span class="sp">Spring Boot</span><span class="sp">Spring WebFlux</span><span class="sp">Spring Security</span><span class="sp">Hibernate/JPA</span><span class="sp">GraphQL</span><span class="sp">REST APIs</span><span class="sp">Microservices</span><span class="sp">Python</span></div></div>
+      <div class="sk-card reveal"><div class="sk-ic">◇</div><div class="sk-cat">Frontend</div><div class="sk-pills"><span class="sp">React.js</span><span class="sp">Angular</span><span class="sp">TypeScript</span><span class="sp">Redux</span><span class="sp">HTML5</span><span class="sp">CSS3</span><span class="sp">Node.js</span></div></div>
+      <div class="sk-card reveal"><div class="sk-ic">◉</div><div class="sk-cat">Cloud & DevOps</div><div class="sk-pills"><span class="sp">AWS EKS</span><span class="sp">EC2 / S3 / Lambda</span><span class="sp">Docker</span><span class="sp">Kubernetes</span><span class="sp">Jenkins</span><span class="sp">GitHub Actions</span><span class="sp">Azure DevOps</span><span class="sp">CI/CD</span></div></div>
+      <div class="sk-card reveal"><div class="sk-ic">◎</div><div class="sk-cat">Data & Messaging</div><div class="sk-pills"><span class="sp">PostgreSQL</span><span class="sp">Oracle</span><span class="sp">MongoDB</span><span class="sp">Apache Kafka</span><span class="sp">RabbitMQ</span><span class="sp">Redis</span><span class="sp">DynamoDB</span></div></div>
+      <div class="sk-card reveal"><div class="sk-ic">◆</div><div class="sk-cat">Security & Auth</div><div class="sk-pills"><span class="sp">OAuth 2.0</span><span class="sp">JWT</span><span class="sp">Spring Security</span><span class="sp">RBAC</span><span class="sp">SSL/TLS</span></div></div>
+      <div class="sk-card reveal"><div class="sk-ic">◐</div><div class="sk-cat">Testing & Observability</div><div class="sk-pills"><span class="sp">JUnit</span><span class="sp">Mockito</span><span class="sp">Selenium</span><span class="sp">Postman</span><span class="sp">JMeter</span><span class="sp">Cypress</span><span class="sp">CloudWatch</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="work-s">
+  <div class="wrap">
+    <div class="sec-ey reveal"><span class="en">03</span><span class="el"></span><span class="et">Experience</span></div>
+    <h2 class="sec-h reveal">Where I've <em>worked.</em></h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tll"><div class="tlco">Deutsche Bank</div><div class="tlpe">Jul 2025 – Present</div><div class="tllo">Remote, USA</div><div class="tlty">Full-time</div></div>
+        <div class="tlsp"><div class="tl-node"></div><div class="tl-line"></div></div>
+        <div class="tlr"><div class="tlro">Software Engineer</div><ul class="tlhl"><li>Designed 12+ Spring Boot microservices handling 1.5M+ daily financial transactions</li><li>Built reactive APIs with Spring WebFlux — 40% increase in concurrent request capacity</li><li>Implemented OAuth 2.0 &amp; Spring Security for digital banking compliance</li><li>Containerized on AWS EKS — 92% uptime, 22% infrastructure cost reduction</li><li>Optimized PostgreSQL and Oracle queries — 35% query performance improvement</li></ul></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tll"><div class="tlco">S&amp;P Global Inc.</div><div class="tlpe">Jun 2022 – Jul 2024</div><div class="tllo">Hybrid, India</div><div class="tlty">Full-time</div></div>
+        <div class="tlsp"><div class="tl-node"></div><div class="tl-line"></div></div>
+        <div class="tlr"><div class="tlro">Software Engineer</div><ul class="tlhl"><li>Engineered GraphQL backend services for enterprise analytics platforms</li><li>Built React dashboards reducing manual reporting by 42% for 18+ stakeholders</li><li>Deployed on Azure — 35% deployment reliability improvement, 30% faster release cycles</li><li>Developed Python data pipelines for large-scale enterprise data transformation</li></ul></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tll"><div class="tlco">Indiana Wesleyan Univ.</div><div class="tlpe">Aug 2024 – Dec 2025</div><div class="tllo">Indiana, USA</div><div class="tlty">Graduate</div></div>
+        <div class="tlsp"><div class="tl-node"></div><div class="tl-line"></div></div>
+        <div class="tlr"><div class="tlro">M.S. Information Technology</div><ul class="tlhl"><li>Completed master's while contributing full-time at Deutsche Bank</li><li>Focused on distributed systems, cloud architecture, and enterprise software</li></ul></div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tll"><div class="tlco">Gujarat Tech. University</div><div class="tlpe">Aug 2019 – May 2023</div><div class="tllo">India</div><div class="tlty">Undergraduate</div></div>
+        <div class="tlsp"><div class="tl-node"></div></div>
+        <div class="tlr"><div class="tlro">B.E. Information Technology</div><ul class="tlhl"><li>Bachelor's in Information Technology — strong CS fundamentals</li><li>Java-based projects in data structures, algorithms, and web systems</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="proj-s">
+  <div class="wrap">
+    <div class="sec-ey reveal"><span class="en">04</span><span class="el"></span><span class="et">Projects</span></div>
+    <h2 class="sec-h reveal">Things I've <em>shipped.</em></h2>
+    <div class="proj-grid">
+      <div class="pcard2 reveal">
+        <div class="ph"><span class="ptag">FINTECH · BACKEND</span><div class="pmet"><span class="pmv">1.2M+</span><span class="pml">transactions/day capacity</span></div></div>
+        <div class="ptitle">BankFlow API</div>
+        <div class="psub">Event-driven transaction processing engine</div>
+        <p class="pdesc">Production-grade financial transaction service built on Spring Boot and Apache Kafka. Implements circuit-breaker patterns, idempotent processing, full audit logging, JWT authentication, and Kubernetes deployment manifests.</p>
+        <div class="pstack"><span class="pp">Java</span><span class="pp">Spring Boot</span><span class="pp">Apache Kafka</span><span class="pp">PostgreSQL</span><span class="pp">Docker</span><span class="pp">Kubernetes</span><span class="pp">JWT</span></div>
+        <a href="https://github.com/panthpatel16/bankflow-api" target="_blank" rel="noopener" class="pcta">View on GitHub <span class="ca">→</span></a>
+      </div>
+      <div class="pcard2 reveal">
+        <div class="ph"><span class="ptag">ANALYTICS · FULL STACK</span><div class="pmet"><span class="pmv">42%</span><span class="pml">reporting effort reduced</span></div></div>
+        <div class="ptitle">FinDash</div>
+        <div class="psub">Real-time financial KPI platform</div>
+        <p class="pdesc">Full-stack financial analytics dashboard with React frontend and Spring Boot REST backend. Features role-based access control, JWT-secured endpoints, live WebSocket chart updates, and optimized PostgreSQL data layer.</p>
+        <div class="pstack"><span class="pp">React.js</span><span class="pp">Spring Boot</span><span class="pp">PostgreSQL</span><span class="pp">WebSocket</span><span class="pp">JWT</span><span class="pp">RBAC</span></div>
+        <a href="https://github.com/panthpatel16/findash" target="_blank" rel="noopener" class="pcta">View on GitHub <span class="ca">→</span></a>
+      </div>
+      <div class="pcard2 reveal">
+        <div class="ph"><span class="ptag">CLOUD · SERVERLESS</span><div class="pmet"><span class="pmv">$0</span><span class="pml">idle infrastructure cost</span></div></div>
+        <div class="ptitle">StockPulse</div>
+        <div class="psub">Serverless market data aggregator</div>
+        <p class="pdesc">Cloud-native stock data aggregator using AWS Lambda and Python for ingestion, DynamoDB for time-series storage, and a React dashboard for visualization. Zero idle cost — scales to zero when not in use.</p>
+        <div class="pstack"><span class="pp">Python</span><span class="pp">AWS Lambda</span><span class="pp">DynamoDB</span><span class="pp">React.js</span><span class="pp">API Gateway</span><span class="pp">CloudWatch</span></div>
+        <a href="https://github.com/panthpatel16/stockpulse" target="_blank" rel="noopener" class="pcta">View on GitHub <span class="ca">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-s">
+  <div class="wrap">
+    <div class="contact-in">
+      <div class="sec-ey reveal" style="justify-content:center"><span class="en">05</span><span class="el"></span><span class="et">Contact</span></div>
+      <h2 class="sec-h reveal" style="text-align:center">Let's build something<br><em>worth shipping.</em></h2>
+      <p class="contact-sub reveal">Actively looking for Full Stack Java Developer and Software Engineer roles across the US — fintech, banking, and data-heavy platforms preferred.</p>
+      <a href="mailto:panthpatel1697@gmail.com" class="cemail reveal">panthpatel1697@gmail.com</a>
+      <div class="c-links reveal">
+        <a href="https://www.linkedin.com/in/panthpatel16" target="_blank" rel="noopener" class="cl"><span class="cl-ic">in</span> LinkedIn</a>
+        <a href="https://github.com/panthpatel16" target="_blank" rel="noopener" class="cl"><span class="cl-ic">gh</span> GitHub</a>
+        <a href="mailto:panthpatel1697@gmail.com" class="cl"><span class="cl-ic">@</span> Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="fb"><span class="fm">PP</span><span class="fn">Panth Patel</span></div>
+    <div class="fc">Illinois, USA · 2025</div>
+    <div class="fc">Open to Full Stack &amp; Backend roles</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('cv'),x=c.getContext('2d'),pts=[],N=55,D=130,G='rgba(200,168,75,';
+  function sz(){c.width=window.innerWidth;c.height=window.innerHeight}
+  function P(){this.x=Math.random()*c.width;this.y=Math.random()*c.height;this.vx=(Math.random()-.5)*.35;this.vy=(Math.random()-.5)*.35;this.r=Math.random()*1.4+.4;this.o=Math.random()*.4+.1}
+  P.prototype.u=function(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>c.width)this.vx*=-1;if(this.y<0||this.y>c.height)this.vy*=-1};
+  P.prototype.d=function(){x.beginPath();x.arc(this.x,this.y,this.r,0,Math.PI*2);x.fillStyle=G+this.o+')';x.fill()};
+  function init(){pts=[];for(var i=0;i<N;i++)pts.push(new P())}
+  function draw(){
+    x.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<pts.length;i++){
+      for(var j=i+1;j<pts.length;j++){
+        var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<D){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.strokeStyle=G+(1-d/D)*.12+')';x.lineWidth=.5;x.stroke()}
+      }
+      pts[i].u();pts[i].d();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',function(){sz();init()});
+  sz();init();draw();
+})();
+
+(function(){
+  var n=document.getElementById('nav');
+  window.addEventListener('scroll',function(){n.classList.toggle('scrolled',window.scrollY>60)});
+})();
+
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible')},i*90)});
+  },{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+})();
+
+(function(){
+  var secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+180;
+    secs.forEach(function(s){
+      if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight)
+        links.forEach(function(l){l.style.color=l.getAttribute('href')==='#'+s.id?'var(--gold)':''});
+    });
+  });
+})();
+</script>
+</body>
+</html>
